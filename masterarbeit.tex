@@ -1,0 +1,191 @@
+% ============================================================================
+%  Masterarbeit – Mathematik
+%  Kompilieren: latexmk -pdf masterarbeit.tex   (verwendet biber)
+% ============================================================================
+\documentclass[
+  12pt,
+  a4paper,
+  oneside,              % für doppelseitigen Druck: twoside
+  parskip=half,         % Absätze mit Abstand statt Einzug
+  bibliography=totoc,   % Literaturverzeichnis ins Inhaltsverzeichnis
+  listof=totoc,         % Abbildungs-/Tabellenverzeichnis ins Inhaltsverzeichnis
+  numbers=noenddot,
+  ngerman
+]{scrreprt}
+
+% ----------------------------------------------------------------------------
+%  Sprache, Schrift, Kodierung
+% ----------------------------------------------------------------------------
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[ngerman]{babel}
+\usepackage[autostyle=true,german=quotes]{csquotes}  % \enquote{...}
+\usepackage{lmodern}
+\usepackage{microtype}
+
+% ----------------------------------------------------------------------------
+%  Seitenlayout
+% ----------------------------------------------------------------------------
+\usepackage[a4paper,left=3cm,right=2.5cm,top=2.5cm,bottom=2.5cm]{geometry}
+\usepackage{setspace}
+\onehalfspacing
+
+% ----------------------------------------------------------------------------
+%  Mathematik
+% ----------------------------------------------------------------------------
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage{bm}
+\usepackage{dsfont}       % \mathds{1} für Indikatorfunktionen
+\usepackage{mathrsfs}     % \mathscr{}
+\usepackage{nicefrac}
+
+% ----------------------------------------------------------------------------
+%  Grafiken, Tabellen, Algorithmen
+% ----------------------------------------------------------------------------
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta,positioning,calc,shapes,graphs,decorations.pathreplacing}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{enumitem}
+\usepackage[ruled,vlined,linesnumbered,german]{algorithm2e}
+
+% ----------------------------------------------------------------------------
+%  Literaturverzeichnis
+% ----------------------------------------------------------------------------
+\usepackage[
+  backend=biber,
+  style=alphabetic,     % Alternativen: numeric, authoryear
+  maxbibnames=99,
+  giveninits=true,
+  doi=true,
+  url=false,
+  eprint=true
+]{biblatex}
+\addbibresource{literatur.bib}
+
+% ----------------------------------------------------------------------------
+%  Hyperlinks und Querverweise (möglichst spät laden)
+% ----------------------------------------------------------------------------
+\usepackage[hidelinks,pdfusetitle]{hyperref}
+\usepackage[ngerman,capitalise,noabbrev]{cleveref}
+
+% ----------------------------------------------------------------------------
+%  Theorem-Umgebungen (gemeinsame Nummerierung pro Kapitel)
+% ----------------------------------------------------------------------------
+\declaretheorem[name=Satz,numberwithin=chapter]{satz}
+\declaretheorem[name=Lemma,sibling=satz]{lemma}
+\declaretheorem[name=Korollar,sibling=satz]{korollar}
+\declaretheorem[name=Proposition,sibling=satz]{proposition}
+\declaretheorem[name=Vermutung,sibling=satz]{vermutung}
+\declaretheorem[name=Definition,style=definition,sibling=satz]{definition}
+\declaretheorem[name=Beispiel,style=definition,sibling=satz]{beispiel}
+\declaretheorem[name=Problem,style=definition,sibling=satz]{problem}
+\declaretheorem[name=Bemerkung,style=remark,sibling=satz]{bemerkung}
+
+\renewcommand{\qedsymbol}{$\blacksquare$}
+\numberwithin{equation}{chapter}
+
+% cleveref-Namen für eigene Umgebungen
+\crefname{satz}{Satz}{Sätze}
+\crefname{lemma}{Lemma}{Lemmata}
+\crefname{korollar}{Korollar}{Korollare}
+\crefname{proposition}{Proposition}{Propositionen}
+\crefname{vermutung}{Vermutung}{Vermutungen}
+\crefname{definition}{Definition}{Definitionen}
+\crefname{beispiel}{Beispiel}{Beispiele}
+\crefname{problem}{Problem}{Probleme}
+\crefname{bemerkung}{Bemerkung}{Bemerkungen}
+\crefname{algocf}{Algorithmus}{Algorithmen}
+
+% ----------------------------------------------------------------------------
+%  Eigene Makros
+% ----------------------------------------------------------------------------
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\cO}{\mathcal{O}}
+\DeclareMathOperator{\poly}{poly}
+\DeclarePairedDelimiter{\abs}{\lvert}{\rvert}
+\DeclarePairedDelimiter{\norm}{\lVert}{\rVert}
+\DeclarePairedDelimiter{\set}{\{}{\}}
+\DeclarePairedDelimiter{\ceil}{\lceil}{\rceil}
+\DeclarePairedDelimiter{\floor}{\lfloor}{\rfloor}
+
+% ----------------------------------------------------------------------------
+%  Metadaten
+% ----------------------------------------------------------------------------
+\newcommand{\arbeitTitel}{Titel}
+\newcommand{\arbeitAutor}{Nils Bosbach}
+\newcommand{\arbeitMatrikel}{433132}
+\newcommand{\arbeitBetreuer}{Prof. Dr. Ir. Arie M.C.A. Koster}
+\newcommand{\arbeitZweitgutachter}{Prof.\,Dr.~N.\,N.}
+\newcommand{\arbeitInstitut}{Lehr- und Forschungsgebiet Diskrete Optimierung}
+\newcommand{\arbeitUni}{RWTH Aachen University}
+\newcommand{\arbeitDatum}{\today}
+
+% ============================================================================
+\begin{document}
+% ============================================================================
+
+% ----------------------------------------------------------------------------
+%  Titelseite
+% ----------------------------------------------------------------------------
+\begin{titlepage}
+  \centering
+  \includegraphics[width=\textwidth]{rwth_mathe2_rgb_de.png}\par
+  \vspace*{3cm}
+  {\huge\bfseries \arbeitTitel\par}
+  \vspace{1.5cm}
+  {\Large Masterarbeit\par}
+  \vspace{0.5cm}
+  {\large im Studiengang Mathematik\par}
+  \vspace{2cm}
+  {\large vorgelegt von\par}
+  \vspace{0.3cm}
+  {\Large \arbeitAutor\par}
+  {Matrikelnummer: \arbeitMatrikel\par}
+  \vfill
+  \begin{tabular}{ll}
+    Erstgutachter:  & \arbeitBetreuer \\
+    Zweitgutachter: & \arbeitZweitgutachter \\
+    Abgabedatum:    & \arbeitDatum
+  \end{tabular}
+\end{titlepage}
+
+% ----------------------------------------------------------------------------
+%  Vorspann
+% ----------------------------------------------------------------------------
+\pagenumbering{roman}
+
+\tableofcontents
+
+% ----------------------------------------------------------------------------
+%  Hauptteil
+% ----------------------------------------------------------------------------
+\cleardoublepage
+\pagenumbering{arabic}
+
+\chapter{Einleitung}\label{ch:einleitung}
+
+% ----------------------------------------------------------------------------
+%  Anhang
+% ----------------------------------------------------------------------------
+% \appendix
+% \chapter{...}
+
+% ----------------------------------------------------------------------------
+%  Literaturverzeichnis
+% ----------------------------------------------------------------------------
+\printbibliography[heading=bibintoc,title={Literaturverzeichnis}]
+
+\end{document}
