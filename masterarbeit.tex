@@ -51,7 +51,6 @@
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta,positioning,calc,shapes,graphs,decorations.pathreplacing}
 \usepackage{booktabs}
-\usepackage{array}
 \usepackage{caption}
 \usepackage{subcaption}
 \usepackage{enumitem}
@@ -70,6 +69,7 @@
   eprint=true
 ]{biblatex}
 \addbibresource{literatur.bib}
+\nocite{*}  % listet alle Einträge der .bib; entfernen, sobald zitiert wird
 
 % ----------------------------------------------------------------------------
 %  Hyperlinks und Querverweise (möglichst spät laden)
@@ -140,6 +140,7 @@
 % ----------------------------------------------------------------------------
 %  Titelseite
 % ----------------------------------------------------------------------------
+\pagenumbering{alph}  % eigene Seitennummern für die Titelseite (vermeidet doppelte PDF-Anker)
 \begin{titlepage}
   \centering
   \includegraphics[width=\textwidth]{rwth_mathe2_rgb_de.png}\par
